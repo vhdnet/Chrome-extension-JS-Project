@@ -1,13 +1,30 @@
 let myLeads = [];
 const inputEl = document.getElementById("input-el");
 const inputBtn = document.getElementById("input-btn");
-const UlEl = document.getElementById("ul-el");
+const ulEl = document.getElementById("ul-el");
 
+let leadsFromLocalstorage = JSON.parse(localStorage.getItem("myLeads"));
+console.log(leadsFromLocalstorage);
 inputBtn.addEventListener("click", function () {
   myLeads.push(inputEl.value);
-  console.log(myLeads);
+  inputEl.value = "";
+
+  localStorage.setItem("myLeads", JSON.stringify(myLeads));
+  renderLeads();
+
+  console.log(localStorage.getItem("myLeads"));
 });
 
-for (let i = 0; i < myLeads.length; i++) {
-  UlEl.innerHTML += "<li>" + myLeads[i] + "</li>";
+function renderLeads() {
+  let listItems = "";
+  for (let i = 0; i < myLeads.length; i++) {
+    listItems += `
+      <li>
+        <a target="_blank" href ="${myLeads[i]}"> 
+        ${myLeads[i]} 
+        </a>
+      </li>
+      `;
+  }
+  ulEl.innerHTML = listItems;
 }

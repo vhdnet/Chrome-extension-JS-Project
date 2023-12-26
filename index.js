@@ -4,7 +4,12 @@ const inputBtn = document.getElementById("input-btn");
 const ulEl = document.getElementById("ul-el");
 
 let leadsFromLocalstorage = JSON.parse(localStorage.getItem("myLeads"));
-console.log(leadsFromLocalstorage);
+
+if (leadsFromLocalstorage) {
+  myLeads = leadsFromLocalstorage;
+  renderLeads();
+}
+
 inputBtn.addEventListener("click", function () {
   myLeads.push(inputEl.value);
   inputEl.value = "";
